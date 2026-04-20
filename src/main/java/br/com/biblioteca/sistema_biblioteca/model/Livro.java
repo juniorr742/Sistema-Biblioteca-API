@@ -10,7 +10,6 @@ public class Livro {
     private String titulo;
     private String autor;
     private boolean disponivel;
-    private int prazo = 7;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

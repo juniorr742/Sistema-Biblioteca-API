@@ -9,16 +9,20 @@ public class RegistroEmprestimo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idTransacao;
-    private long idUsuario;
-    private long idLivro;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+    @ManyToOne
+    @JoinColumn(name = "livro_id")
+    private Livro livro;
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
     private boolean finalizado;
 
     public RegistroEmprestimo(){}
-    public RegistroEmprestimo(long idUsuario, long idLivro){
-        this.idUsuario = idUsuario;
-        this.idLivro = idLivro;
+    public RegistroEmprestimo(Usuario usuario, Livro livro){
+        this.usuario = usuario;
+        this.livro = livro;
         this.dataEmprestimo = LocalDate.now();
         this.finalizado = false;
     }
@@ -27,12 +31,12 @@ public class RegistroEmprestimo {
         return idTransacao;
     }
 
-    public long getIdUsuario() {
-        return idUsuario;
+    public Livro getLivro() {
+        return livro;
     }
 
-    public long getIdLivro() {
-        return idLivro;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public boolean isFinalizado() {
@@ -51,6 +55,6 @@ public class RegistroEmprestimo {
     @Override
     public String toString(){
         return String.format("Transação: %d | Usuário ID: %d | Livro ID: %d | Data: %s | Status: %s",
-                idTransacao, idUsuario, idLivro, dataEmprestimo, (finalizado ? "Devolvido":"Ativo"));
+                idTransacao, usuario.getId(), livro.getId(), dataEmprestimo, (finalizado ? "Devolvido":"Ativo"));
     }
 }

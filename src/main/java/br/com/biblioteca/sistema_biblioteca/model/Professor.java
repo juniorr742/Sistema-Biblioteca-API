@@ -2,7 +2,7 @@ package br.com.biblioteca.sistema_biblioteca.model;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+
 
 @Entity
 @DiscriminatorValue("Professor")

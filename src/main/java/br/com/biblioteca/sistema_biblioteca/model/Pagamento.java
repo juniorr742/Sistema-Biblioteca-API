@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "pagamentos")
 public class Pagamento {
-    double saldoDevedor;
+    private double saldoDevedor;
     private LocalDateTime dataUltimaOperacao;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,11 +41,10 @@ public class Pagamento {
             this.saldoDevedor -= valor;
             atualizarData();
         }else if (valor > this.saldoDevedor){
-            System.out.println("ERRO: Pagamento maior que o saldo devedor.");
+            throw new IllegalArgumentException("ERRO: Pagamento maior que o saldo devedor.");
         }else {
-            System.out.println("ERRO: Valor negativo.");
+            throw new IllegalArgumentException("ERRO: Valor negativo.");
         }
-        atualizarData();
     }
 
     public void quitarTotalmente(){
